@@ -1,0 +1,21 @@
+/* about.css */
+.about-hero {
+    background: #2a2a2a;
+    color: white;
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+}
+
+.story {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+}
+
+.profile-img img {
+    width: 100%;
+    border-radius: 8px;
+}
