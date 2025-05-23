@@ -1,20 +1,14 @@
 // script.js
 // Theme Toggle
+const themeToggle = document.querySelector('.theme-toggle');
 function toggleTheme() {
     document.body.classList.toggle('light-theme');
     const isLight = document.body.classList.contains('light-theme');
-    
-    // Adjust backdrop filter for header
-    const header = document.querySelector('.header');
-    if(isLight) {
-        header.style.backdropFilter = 'blur(20px) brightness(1.1)';
-    } else {
-        header.style.backdropFilter = 'blur(20px)';
-    }
-    
     localStorage.setItem('theme', isLight ? 'light' : 'dark');
     themeToggle.textContent = isLight ? '🌙' : '☀️';
 }
+themeToggle.addEventListener('click', toggleTheme);
+
 // Initialize theme
 const savedTheme = localStorage.getItem('theme');
 if (savedTheme === 'light') {
