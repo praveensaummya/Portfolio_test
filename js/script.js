@@ -4,17 +4,24 @@ const themeToggle = document.querySelector('.theme-toggle');
 function toggleTheme() {
     document.body.classList.toggle('light-theme');
     const isLight = document.body.classList.contains('light-theme');
+    
+    // Adjust header backdrop filter
+    const header = document.querySelector('.header');
+    header.style.backdropFilter = isLight 
+        ? 'blur(20px) brightness(1.1)'
+        : 'blur(20px)';
+    
     localStorage.setItem('theme', isLight ? 'light' : 'dark');
-    themeToggle.textContent = isLight ? '🌙' : '☀️';
 }
-themeToggle.addEventListener('click', toggleTheme);
 
 // Initialize theme
 const savedTheme = localStorage.getItem('theme');
 if (savedTheme === 'light') {
     document.body.classList.add('light-theme');
-    themeToggle.textContent = '🌙';
+    document.querySelector('.header').style.backdropFilter = 'blur(20px) brightness(1.1)';
 }
+
+themeToggle.addEventListener('click', toggleTheme);
 
 // Portfolio Filtering
 document.addEventListener('DOMContentLoaded', () => {
