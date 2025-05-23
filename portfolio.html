@@ -1,31 +1,156 @@
+<!-- portfolio.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/portfolio.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhotoFolio - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <header><!-- Same navigation --></header>
-
-    <main class="portfolio-container">
-        <h1>My Portfolio</h1>
-        <div class="filters">
-            <button data-filter="all">All</button>
-            <button data-filter="weddings">Weddings</button>
-            <button data-filter="landscapes">Landscapes</button>
-            <button data-filter="portraits">Portraits</button>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">P</div>
+                PhotoFolio
+            </a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="portfolio.html" class="nav-link active">Portfolio</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="theme-toggle" aria-label="Toggle theme">☀️</button>
         </div>
+    </header>
 
-        <div class="portfolio-grid">
-            <div class="portfolio-item" data-category="weddings">
-            <img src="wedding1.jpg" alt="Wedding Photo">
-        </div>
-            <div class="portfolio-item" data-category="landscapes">
-            <img src="landscape1.jpg" alt="Landscape Photo">
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="portfolio-section">
+            <h1 class="section-title">My Portfolio</h1>
+            <p class="section-subtitle">
+                A curated collection of my favorite shots. Explore different categories to 
+                see the breadth of my work.
+            </p>
+            
+            <div class="portfolio-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="weddings">Weddings</button>
+                <button class="filter-btn" data-filter="landscapes">Landscapes</button>
+                <button class="filter-btn" data-filter="portraits">Portraits</button>
+                <button class="filter-btn" data-filter="commercial">Commercial</button>
+            </div>
+
+            <div class="portfolio-grid">
+                <!-- Portrait Category -->
+                <div class="portfolio-item" data-category="portraits">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop" alt="Portrait">
+                    <div class="portfolio-overlay">
+                        <a href="#" class="view-btn">View Image</a>
+                    </div>
+                </div>
+
+                <!-- Landscape Category -->
+                <div class="portfolio-item" data-category="landscapes">
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop" alt="Landscape">
+                    <div class="portfolio-overlay">
+                        <a href="#" class="view-btn">View Image</a>
+                    </div>
+                </div>
+
+                <!-- Wedding Category -->
+                <div class="portfolio-item" data-category="weddings">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=600&fit=crop" alt="Wedding">
+                    <div class="portfolio-overlay">
+                        <a href="#" class="view-btn">View Image</a>
+                    </div>
+                </div>
+
+                <!-- Commercial Category -->
+                <div class="portfolio-item" data-category="commercial">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop" alt="Commercial">
+                    <div class="portfolio-overlay">
+                        <a href="#" class="view-btn">View Image</a>
+                    </div>
+                </div>
+
+                <!-- Portrait Category -->
+                <div class="portfolio-item" data-category="portraits">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=800&h=600&fit=crop" alt="Portrait">
+                    <div class="portfolio-overlay">
+                        <a href="#" class="view-btn">View Image</a>
+                    </div>
+                </div>
+
+                <!-- Landscape Category -->
+                <div class="portfolio-item" data-category="landscapes">
+                    <img src="https://images.unsplash.com/photo-1578068959117-b8c2eaa48b64?w=800&h=600&fit=crop" alt="Landscape">
+                    <div class="portfolio-overlay">
+                        <a href="#" class="view-btn">View Image</a>
+                    </div>
+                </div>
+
+                <!-- Wedding Category -->
+                <div class="portfolio-item" data-category="weddings">
+                    <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=800&h=600&fit=crop" alt="Wedding">
+                    <div class="portfolio-overlay">
+                        <a href="#" class="view-btn">View Image</a>
+                    </div>
+                </div>
+
+                <!-- Commercial Category -->
+                <div class="portfolio-item" data-category="commercial">
+                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop" alt="Commercial">
+                    <div class="portfolio-overlay">
+                        <a href="#" class="view-btn">View Image</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 
-    <footer><!-- Same footer --></footer>
-    <script src="js/nav.js"></script>
+    <footer class="footer">
+        <p>&copy; 2023 PhotoFolio. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/script.js"></script>
+    
+    <!-- Portfolio-specific JS -->
+    <script>
+        // Initialize filter functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get all filter buttons and portfolio items
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+            // Add click event listeners to filter buttons
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    button.classList.add('active');
+                    
+                    // Get filter value
+                    const filter = button.dataset.filter;
+                    
+                    // Filter portfolio items
+                    portfolioItems.forEach(item => {
+                        const category = item.dataset.category;
+                        if (filter === 'all' || category === filter) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>

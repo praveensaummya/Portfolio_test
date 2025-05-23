@@ -1,34 +1,118 @@
+<!-- about.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/about.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhotoFolio - About</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <header><!-- Same navigation --></header>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">P</div>
+                PhotoFolio
+            </a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+                    <li><a href="about.html" class="nav-link active">About</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="theme-toggle" aria-label="Toggle theme">☀️</button>
+        </div>
+    </header>
 
-    <main class="about-container">
-        <section class="about-hero">
-            <h1>About Me</h1>
-        </section>
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="about-section">
+            <h1 class="section-title">About Me</h1>
+            <p class="section-subtitle">
+                Learn more about my journey, passion for photography, and what drives 
+                my creative vision.
+            </p>
+            
+            <div class="about-content">
+                <div class="profile-card">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500&h=500&fit=crop&crop=faces" 
+                         alt="Sarah Johnson" 
+                         class="profile-image">
+                    <h2 class="profile-name">Sarah Johnson</h2>
+                    <p class="profile-title">Photographer & Visual Storyteller</p>
+                    <a href="#" class="download-cv">
+                        📄 Download CV
+                    </a>
+                </div>
 
-        <section class="story">
-            <div class="profile-img">
-                <img src="images/profile.jpg" alt="Your Name">
+                <div class="about-details">
+                    <div class="about-block">
+                        <h3>👤 My Story</h3>
+                        <p>
+                            Hello! I'm Sarah Johnson, a passionate photographer based in New York City 
+                            with 8 years of experience in capturing life's most precious moments. 
+                            My journey began with a simple film camera gifted by my grandfather, 
+                            and it has evolved into a lifelong pursuit of visual storytelling.
+                        </p>
+                        <p>
+                            Specializing in wedding and portrait photography, my work is characterized 
+                            by warm, natural tones and authentic emotional capture. I believe in creating 
+                            images that feel timeless yet fresh, blending classic composition with 
+                            contemporary style.
+                        </p>
+                    </div>
+
+                    <div class="about-block">
+                        <h3>💼 My Approach</h3>
+                        <p>
+                            Every shoot is a collaboration. Whether it's a couple's special day or 
+                            a corporate brand shoot, I focus on:
+                        </p>
+                        <ul class="achievements">
+                            <li>Understanding client vision and needs</li>
+                            <li>Creating comfortable, enjoyable experiences</li>
+                            <li>Capturing genuine, unposed moments</li>
+                            <li>Delivering exceptional quality with quick turnaround</li>
+                        </ul>
+                    </div>
+
+                    <div class="about-block">
+                        <h3>🏆 Awards & Recognition</h3>
+                        <ul class="achievements">
+                            <li>2022 International Photography Awards - 1st Place (Wedding Category)</li>
+                            <li>Featured in National Geographic's "Top Emerging Photographers 2021"</li>
+                            <li>Canon Ambassador since 2020</li>
+                            <li>Regular contributor to Vogue Weddings</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="bio">
-                <h2>My Story</h2>
-                <!-- Add your bio content here -->
-            </div>
-        </section>
-
-        <section class="approach">
-            <h2>My Approach</h2>
-            <!-- Add approach content -->
-        </section>
+        </div>
     </main>
 
-    <footer><!-- Same footer --></footer>
-    <script src="js/nav.js"></script>
+    <footer class="footer">
+        <p>&copy; 2023 PhotoFolio. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/script.js"></script>
+    
+    <!-- About-specific JS -->
+    <script>
+        // Add smooth hover effect for download CV button
+        document.querySelector('.download-cv').addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px)';
+            this.style.boxShadow = '0 5px 15px rgba(168, 85, 247, 0.2)';
+        });
+
+        document.querySelector('.download-cv').addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = 'none';
+        });
+    </script>
 </body>
 </html>
