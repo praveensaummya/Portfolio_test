@@ -42,7 +42,9 @@ footer {
     margin-top: 4rem;
 }
 
+/* Modify existing .cta class */
 .cta {
+    display: inline-block;
     padding: 1rem 2rem;
     background: #2a2a2a;
     color: white;
@@ -50,12 +52,21 @@ footer {
     border-radius: 4px;
     cursor: pointer;
     transition: background 0.3s ease;
+    text-decoration: none;
 }
 
-.cta:hover {
-    background: #4a4a4a;
+/* Add mobile responsiveness */
+@media (max-width: 768px) {
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cta {
+        width: 100%;
+        text-align: center;
+    }
 }
-
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
