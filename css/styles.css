@@ -114,17 +114,42 @@ body.light-theme {
 .theme-toggle {
     background: none;
     border: none;
-    color: var(--text-secondary);
-    font-size: 1.25rem;
-    cursor: pointer;
-    padding: 0.5rem;
+    padding: 8px;
     border-radius: 50%;
+    cursor: pointer;
     transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-
 .theme-toggle:hover {
     background: var(--hover-bg);
-    color: var(--text-primary);
+}
+.theme-icon {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease;
+}
+.theme-icon .sun {
+    display: block;
+}
+
+.theme-icon .moon {
+    display: none;
+}
+
+body.light-theme .theme-icon {
+    transform: rotate(180deg);
+}
+
+body.light-theme .theme-icon .sun {
+    display: none;
+}
+
+body.light-theme .theme-icon .moon {
+    display: block;
 }
 
 /* Main Content */
