@@ -8,6 +8,40 @@
     gap: 1rem;
     justify-content: center;
     margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+.filters button {
+    padding: 0.8rem 1.5rem;
+    border: 2px solid var(--button-bg);
+    background: var(--bg-color);
+    color: var(--text-color);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.filters button:hover {
+    background: var(--button-bg);
+    color: var(--header-text);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.filters button.active {
+    background: var(--button-bg);
+    color: var(--header-text);
+    border-color: var(--button-bg);
+    position: relative;
+    padding-right: 2.5rem;
+}
+.filters button.active::after {
+    content: '✓';
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--header-text);
 }
 
 .portfolio-grid {
@@ -55,4 +89,24 @@
   color: var(--header-text);
   font-size: 1.5rem;
   cursor: pointer;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    .filters {
+        gap: 0.5rem;
+    }
+    
+    .filters button {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .filters button.active {
+        padding-right: 1.8rem;
+    }
+    
+    .filters button.active::after {
+        right: 0.5rem;
+    }
 }
