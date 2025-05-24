@@ -1,9 +1,19 @@
 // script.js
 // Theme Toggle
 const themeToggle = document.querySelector('.theme-toggle');
+
+function updateThemeToggleAttributes(isLight) {
+    const label = isLight ? 'Switch to dark mode' : 'Switch to light mode';
+    themeToggle.setAttribute('title', label);
+    themeToggle.setAttribute('aria-label', label);
+}
+
 function toggleTheme() {
     document.body.classList.toggle('light-theme');
     const isLight = document.body.classList.contains('light-theme');
+    
+    // Update button attributes
+    updateThemeToggleAttributes(isLight);
     
     // Adjust header backdrop filter
     const header = document.querySelector('.header');
@@ -19,6 +29,9 @@ const savedTheme = localStorage.getItem('theme');
 if (savedTheme === 'light') {
     document.body.classList.add('light-theme');
     document.querySelector('.header').style.backdropFilter = 'blur(20px) brightness(1.1)';
+    updateThemeToggleAttributes(true);
+} else {
+    updateThemeToggleAttributes(false);
 }
 
 themeToggle.addEventListener('click', toggleTheme);
