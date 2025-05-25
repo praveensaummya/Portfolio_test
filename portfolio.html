@@ -121,9 +121,65 @@
         </div>
     </main>
 
+    <!-- Image Viewer -->
+    <div class="image-viewer">
+        <div class="viewer-content">
+            <button class="viewer-close" aria-label="Close viewer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="viewer-image-container">
+                <img class="viewer-image" src="" alt="">
+            </div>
+            <button class="viewer-nav viewer-prev" aria-label="Previous image">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+            <button class="viewer-nav viewer-next" aria-label="Next image">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+            <div class="viewer-info">
+                <div class="viewer-caption"></div>
+                <div class="viewer-counter"></div>
+            </div>
+        </div>
+    </div>
+
     <footer class="footer">
         <p style="font-size: small;">&copy; 2023 PhotoFolio. All rights reserved.</p>
     </footer>
+
+    <!-- Guide for adding new portfolio images -->
+    <!-- 
+    To add new images to your portfolio:
+
+    1. In the portfolio-grid div, copy this template:
+    <div class="portfolio-item" data-category="your-category">
+        <img src="your-image-url" alt="Image Description">
+        <div class="portfolio-overlay">
+            <a href="#" class="view-btn">View Image</a>
+        </div>
+    </div>
+
+    2. Choose a category: "portraits", "landscapes", "weddings", or "commercial"
+    3. Replace:
+       - your-category: with one of the categories above
+       - your-image-url: with your image URL
+       - Image Description: with a description of your image
+
+    Example with local image:
+    <div class="portfolio-item" data-category="portraits">
+        <img src="images/your-photo.jpg" alt="Portrait of John">
+        <div class="portfolio-overlay">
+            <a href="#" class="view-btn">View Image</a>
+        </div>
+    </div>
+    -->
 
     <!-- JavaScript -->
     <script src="js/script.js"></script>
@@ -158,6 +214,141 @@
                     });
                 });
             });
+        });
+
+        // Image Viewer Functionality
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+        const viewButtons = document.querySelectorAll('.view-btn');
+        const imageViewer = document.querySelector('.image-viewer');
+        const viewerImage = document.querySelector('.viewer-image');
+        const viewerClose = document.querySelector('.viewer-close');
+        const viewerPrev = document.querySelector('.viewer-prev');
+        const viewerNext = document.querySelector('.viewer-next');
+        const viewerCaption = document.querySelector('.viewer-caption');
+        const viewerCounter = document.querySelector('.viewer-counter');
+        
+        let currentIndex = 0;
+        let visibleItems = [];
+
+        // Function to open image viewer
+        function openImageViewer(index) {
+            // Get all currently visible portfolio items
+            visibleItems = Array.from(portfolioItems).filter(item => 
+                item.style.display !== 'none');
+                
+            currentIndex = index;
+            updateViewerImage();
+            
+            // Show the viewer
+            imageViewer.classList.add('active');
+            
+            // Disable body scroll
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Function to close image viewer
+        function closeImageViewer() {
+            imageViewer.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        // Function to update the image in the viewer
+        function updateViewerImage() {
+            if (visibleItems.length === 0) return;
+            
+            // Add loading class
+            viewerImage.classList.add('loading');
+            
+            const item = visibleItems[currentIndex];
+            const img = item.querySelector('img');
+            
+            // Set image source and alt text
+            viewerImage.src = img.src;
+            viewerImage.alt = img.alt;
+            
+            // Update caption and counter
+            viewerCaption.textContent = img.alt;
+            viewerCounter.textContent = `${currentIndex + 1} of ${visibleItems.length}`;
+            
+            // Remove loading class when image is loaded
+            viewerImage.onload = () => {
+                viewerImage.classList.remove('loading');
+            };
+        }
+        
+        // Function to navigate to previous image
+        function prevImage() {
+            viewerImage.classList.add('slide-right');
+            
+            setTimeout(() => {
+                currentIndex = (currentIndex - 1 + visibleItems.length) % visibleItems.length;
+                updateViewerImage();
+                viewerImage.classList.remove('slide-right');
+            }, 300);
+        }
+        
+        // Function to navigate to next image
+        function nextImage() {
+            viewerImage.classList.add('slide-left');
+            
+            setTimeout(() => {
+                currentIndex = (currentIndex + 1) % visibleItems.length;
+                updateViewerImage();
+                viewerImage.classList.remove('slide-left');
+            }, 300);
+        }
+        
+        // Set up event listeners
+        viewButtons.forEach((button, index) => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const itemIndex = Array.from(portfolioItems)
+                    .filter(item => item.style.display !== 'none')
+                    .findIndex(item => item.contains(button));
+                openImageViewer(itemIndex);
+            });
+        });
+        
+        // Portfolio item click event (click anywhere on the item)
+        portfolioItems.forEach((item) => {
+            item.addEventListener('click', () => {
+                // Get all currently visible items if not already set
+                if (visibleItems.length === 0) {
+                    visibleItems = Array.from(portfolioItems).filter(item => 
+                        item.style.display !== 'none');
+                }
+                const itemIndex = Array.from(visibleItems).indexOf(item);
+                if (itemIndex !== -1) {
+                    openImageViewer(itemIndex);
+                }
+            });
+        });
+        
+        // Close button click event
+        viewerClose.addEventListener('click', closeImageViewer);
+        
+        // Navigation button click events
+        viewerPrev.addEventListener('click', prevImage);
+        viewerNext.addEventListener('click', nextImage);
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!imageViewer.classList.contains('active')) return;
+            
+            if (e.key === 'Escape') {
+                closeImageViewer();
+            } else if (e.key === 'ArrowLeft') {
+                prevImage();
+            } else if (e.key === 'ArrowRight') {
+                nextImage();
+            }
+        });
+        
+        // Click outside to close
+        imageViewer.addEventListener('click', (e) => {
+            if (e.target === imageViewer) {
+                closeImageViewer();
+            }
         });
     </script>
 </body>
